@@ -26,6 +26,7 @@
 #include <autoexecconfig>
 #include <clientprefs>
 #include <retakes>
+#include <myweaponallocator>
 
 #pragma semicolon 1
 #pragma newdecls required
@@ -136,17 +137,24 @@ char g_sRoundType[64];
 public Plugin myinfo =
 {
 	name = "MyWeaponAllocator",
-	author = "shanapu",
+	author = "shanapu, b3none, Cruze",
 	description = "Retakes weapon allocator",
-	version = "2.6",
+	version = "2.7",
 	url = "https://github.com/shanapu/MyWeaponAllocator"
 };
 
 public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err)
 {
 	g_bIsLateLoad = late;
+	
+	CreateNative("MyWeaponAllocator_GetRoundName", Native_GetRoundName);
 
 	return APLRes_Success;
+}
+
+public int Native_GetRoundName(Handle plugin, int numParams)
+{
+	SetNativeString(1, g_sRoundType, 64);
 }
 
 public void OnPluginStart()
