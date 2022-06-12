@@ -1,0 +1,1 @@
+native int MyWeaponAllocator_GetRoundName(char[] sRound);
